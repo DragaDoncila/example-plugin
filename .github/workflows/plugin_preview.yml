@@ -17,4 +17,4 @@ jobs:
       - name: napari hub Preview Page Builder
         uses: chanzuckerberg/napari-hub-preview-action@v0.1.4
         with:
-          hub-ref: main
+          hub-ref: jeremy/sc-168429/url-mismatch
