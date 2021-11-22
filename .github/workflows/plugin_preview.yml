@@ -31,6 +31,6 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: napari hub Preview Page Builder
-        uses: DragaDoncila/napari-hub-preview-action@v0.1.5
+        uses: DragaDoncila/napari-hub-preview-action@v0.1.6
         with:
           hub-ref: main
