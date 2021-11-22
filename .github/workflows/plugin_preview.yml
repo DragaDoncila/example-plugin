@@ -1,20 +1,36 @@
-name: Preview Page
+name: CI
 
-on:
+on: 
+  push:
+    branches:
+      - master
+      - main
+    tags:
+      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
   pull_request:
     branches:
-      - '**'
+      - master
+      - main
+  workflow_dispatch:
 
 jobs:
-  preview-page:
-    name: Preview Page Deploy
-    runs-on: ubuntu-latest
+
+  test:
+    name: ${{ matrix.platform }} ${{ matrix.python-version }}
+    runs-on: ${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ubuntu-latest, macos-latest]
+        python-version: [3.7, 3.8, 3.9]
+        include:
+          - platform: windows-latest
+            python-version: 3.8
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v2
+      
       - name: napari hub Preview Page Builder
-        uses: chanzuckerberg/napari-hub-preview-action@v0.1.4
+        uses: chanzuckerberg/napari-hub-preview-action@v0.1.5
         with:
-          hub-ref: read_fork_pr_number
+          hub-ref: main
